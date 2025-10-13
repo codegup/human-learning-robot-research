@@ -6,3 +6,34 @@ Login instructions are on the school website.
 
 Certain models requires different libraries that need to be locally downloaded. Because of this, it is
 recommended to use the conda environment.
+
+# Setting Up HPC
+
+Refer to the school's website to login. Once logged in:
+
+The node that you are on is called the login node. I'm not sure if this is the official term, but this
+is the node that has internet but *no* GPU. This means you can't run any model/code available in this repo
+on this node.
+On top of that, the GPU nodes *don't* have internet but to run any model from Hugging Face, you need to be
+able to access the API (which requires internet). The solution is to download the repo by using
+`git clone` **in the login node**. If you try doing `git clone` on a GPU node, it will not work
+because it requires internet.
+
+`module avail` command lists all of the available modules that the HPC offers. You can think of
+these modules as regular apps on your computer, like Notebook or Word. You cannot download anything outside
+of these modules unless you contact whoever is in charge. For this research though, we only need
+Anaconda, so download whatever is the latest version of Anaconda using `module load [exact_module_name]`.
+
+**Note:** conda was already working once logged in but in case it doesn't, make sure to load it.
+
+Create a regular conda environment. This is googleable. 
+**Note:** Once inside the conda environment, always download using `conda forge`. However, there
+are some libraries that isn't available to conda. In this case, it's OK to download with pip. However,
+you cannot download anything using sudo apt.
+
+The HPC comes with a folder called scratch. This is the folder where you will put ***all*** your work. 
+If you want to know why, google it. Make sure that at this point, you are in your conda environment
+and in the scratch directory.
+
+Now, you're ready to code!
+
