@@ -37,3 +37,12 @@ and in the scratch directory.
 
 Now, you're ready to code!
 
+# Running Hugging Face Models
+
+To run any models given the script in the corresponding directory, you ***must*** locally download the
+model in the same directory as the script. The command to do is `huggingface-cli download <model-id> --local-dir <target-folder>`.
+
+After that, you run the script by doing `./[script_name].py --model-dir-name [dir_name]`, where `dir_name` is 
+the name in which you downloaded the model.
+
+
