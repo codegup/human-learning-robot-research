@@ -2,42 +2,59 @@
 import os
 import argparse
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, set_seed
+from transformers import AutoTokenizer, AutoModelForCausalLM, set_seed, TextStreamer
 from pathlib import Path
+import json
 
-# Disable tokenizer parallelism warnings
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-def phi3_test():
+def extract_json_from_response(response: str) -> bool:
+    start = response.find('{')
+    if start == -1:
+        return False  # no '{' found
+
+    brace_count = 0
+    for i, ch in enumerate(response[start:], start=start):
+        if ch == '{':
+            brace_count += 1
+        elif ch == '}':
+            brace_count -= 1
+            if brace_count == 0:
+                json_str = response[start:i+1]
+                try:
+                    json.loads(json_str)
+                    return True
+                except json.JSONDecodeError:
+                    return False
+
+    return False    
+
+def model_test():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--model-dir-name",
+        "--model_dir_path",
         required=True,
-        help="The name of the directory containing the model"
+        help="The path of the directory containing the model"
     )
     args = parser.parse_args()
 
-    # Reproducibility
     set_seed(2024)
 
     # Ensure CUDA is available
     assert torch.cuda.is_available(), "CUDA not available on this node"
 
-    # Resolve model directory relative to script location
-    model_checkpoint = Path(__file__).parent.resolve() / args.model_dir_name
+    model_dir = args.model_dir_path
 
     # Load tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(
-        model_checkpoint,
+        model_dir,
         local_files_only=True,
     )
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_checkpoint,
+        model_dir,
         local_files_only=True,
     ).to("cuda").eval() # move the parameters to the GPU and just evaluate model
 
-    # Adjust embeddings if tokenizer size changed (when adding special/custom tokens)
     if model.get_input_embeddings().weight.size(0) != len(tokenizer):
         model.resize_token_embeddings(len(tokenizer))
 
@@ -54,7 +71,8 @@ def phi3_test():
             **inputs,
             # choose the next token with highest probability
             do_sample=False,
-            max_new_tokens=256,
+            streamer=TextStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True),
+            max_new_tokens=1000,
             # max probability sum is 0.9 to allow some randomness
             top_p=1.0,
             pad_token_id=tokenizer.pad_token_id,
@@ -62,11 +80,12 @@ def phi3_test():
         )
 
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print(response.strip())
+    if (extract_json_from_response(response) == True):
+        print("Valid json!!!!!!!")
+
 
 def main():
-    phi3_test()
+    model_test()
 
 if __name__ == "__main__":
     main()
-

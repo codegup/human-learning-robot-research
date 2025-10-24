@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
-# General script to download any Hugging Face model locally.
-# If the target directory exists, it will be overwritten.
 
 set -euo pipefail
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <model_id> <local_dir>"
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <model_id>"
   exit 1
 fi
 
 MODEL_ID="$1"
-LOCAL_DIR="$2"
+LOCAL_DIR="${MODEL_ID#*/}"
 
 echo "Downloading model: $MODEL_ID"
 echo "Target directory: $LOCAL_DIR"
@@ -28,4 +26,5 @@ echo "Running: huggingface-cli download $MODEL_ID --local-dir $LOCAL_DIR"
 huggingface-cli download "$MODEL_ID" --local-dir "$LOCAL_DIR"
 
 echo "Model saved to: $LOCAL_DIR"
+huggingface-cli cache delete --yes
 
