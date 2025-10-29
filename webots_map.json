@@ -1,0 +1,56 @@
+{
+  "command": {
+    "get_motor_device": 
+    {
+      "description": "Retrieve a motor device from a Webots robot instance.",
+      "requires": ["robot_instance"],
+      "produces": ["motor_device"],
+      "maps_to": {
+        "target_class": "Robot",
+        "method": "getDevice",
+        "library": "controller"
+      }
+    },
+
+    "set_target_position": {
+      "description": "Set the position of a Webots motor device.",
+       "requires": ["robot_instance", "motor_device"],
+      "parameters": ["position_value"],
+      "maps_to": {
+        "target_class": "Motor",
+        "method": "setPosition",
+        "library": "controller"
+      }
+    },
+
+    "set_velocity": {
+      "description": "Set the velocity of a motor device within the robot instance.",
+      "requires": ["robot_instance", "motor_device"],
+      "parameters": ["velocity_value"],
+      "maps_to": {
+        "target_class": "Motor",
+        "method": "setVelocity",
+        "library": "controller"
+      }
+    },
+
+    "read_sensor": {
+      "description": "Read the current value from a sensor device associated with a robot instance.",
+      "requires": ["robot_instance", "sensor_device"],
+      "parameters": ["time_step"],
+      "maps_to": {
+        "target_class": "{sensor_class}",
+        "methods": {
+          "initialize": "enable",
+          "read": "{read_method}"
+        },
+        "library": "controller"
+      }
+    }
+
+  }
+}
+
+
+
+
