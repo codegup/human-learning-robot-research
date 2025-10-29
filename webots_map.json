@@ -1,5 +1,32 @@
 {
-  "command": {
+  "objects": 
+  {
+    "robot_instace": {
+        "description": "The main robot object.",
+        "required": true,
+        "class": "Robot",
+        "library": "controller"
+    },
+    "device": {
+        "description": "A generic device retrieved from robot instance.",
+        "type": "{device_type}",
+        "class": "{device_class}",
+        "library": "controller"
+    },
+
+    "relationship": {
+        "robot_instance": {
+            "retains": ["device"]
+        },
+        "device" : {
+            "requires": "robot_instance"
+        }
+    }
+  },
+
+  "command": 
+  {
+
     "get_motor_device": 
     {
       "description": "Retrieve a motor device from a Webots robot instance.",
@@ -49,6 +76,8 @@
     }
 
   }
+
+
 }
 
 
