@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "move"
+      ]
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": [
+            "forward",
+            "backward",
+            "left",
+            "right",
+            "straight"
+          ],
+          "default": "straight"
+        },
+        "distance_m": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ]
+        }
+      },
+      "required": [
+        "distance_m"
+      ]
+    }
+  },
+  "required": [
+    "action",
+    "parameters"
+  ]
+}
+
+
