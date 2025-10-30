@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "move",
+        "turn"
+      ]
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": [
+            "forward",
+            "backward",
+            "left",
+            "right",
+            "straight"
+          ],
+          "description": "Which way for the robot to move."
+        },
+        "distance": {
+          "type": "number",
+          "description": "Scalar distance."
+        },
+        "angle": {
+          "type": "number",
+          "description": "Turn magnitude."
+        }
+      },
+      "oneOf": [
+        {
+          "title": "Move",
+          "required": [
+            "direction",
+            "distance"
+          ]
+        },
+        {
+          "title": "Turn",
+          "required": [
+            "direction",
+            "angle"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "action",
+    "parameters"
+  ]
+}
