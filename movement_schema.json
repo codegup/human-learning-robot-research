@@ -42,7 +42,27 @@
                 "y",
                 "z"
               ],
-              "description": "3D movement vector components in meters."
+              "description": "Absolute 3D position components in meters."
+            },
+            {
+              "type": "object",
+              "properties": {
+                "dx": {
+                  "type": "number"
+                },
+                "dy": {
+                  "type": "number"
+                },
+                "dz": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "dx",
+                "dy",
+                "dz"
+              ],
+              "description": "Relative 3D translation components in meters."
             },
             {
               "type": "string",
