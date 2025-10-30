@@ -4,7 +4,8 @@
     "action": {
       "type": "string",
       "enum": [
-        "move"
+        "move",
+        "turn"
       ]
     },
     "parameters": {
@@ -21,28 +22,55 @@
           ],
           "default": "straight"
         },
-        "distance_m": {
-          "type": "object",
-          "properties": {
-            "x": {
-              "type": "number"
+        "distance": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "z": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "z"
+              ],
+              "description": "3D movement vector components in meters."
             },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
+            {
+              "type": "string",
+              "enum": [
+                "move"
+              ],
+              "description": "Simple move command."
             }
-          },
-          "required": [
-            "x",
-            "y",
-            "z"
           ]
+        },
+        "angle_rad": {
+          "type": "number",
+          "description": "Rotation angle in radians for turning."
         }
       },
-      "required": [
-        "distance_m"
+      "oneOf": [
+        {
+          "title": "Move action parameters",
+          "required": [
+            "distance"
+          ]
+        },
+        {
+          "title": "Turn action parameters",
+          "required": [
+            "angle_rad"
+          ]
+        }
       ]
     }
   },
