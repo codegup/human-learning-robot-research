@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HK-2 Human-Robot Teaming – Landing Page</title>
+  <style>
+    :root {
+      --bg: #0f1220;
+      --panel: #161a2b;
+      --text: #e7e9f1;
+      --muted: #aab0c0;
+      --brand: #6ad7ff;
+      --border: #2a2f45;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f8fc;
+        --panel: #ffffff;
+        --text: #161a2b;
+        --muted: #4d5570;
+        --brand: #0066ff;
+        --border: #dde2f0;
+        --shadow: 0 8px 20px rgba(12,36,99,.08);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .card {
+      max-width: 1000px;
+      width: 100%;
+      background: var(--panel);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.4rem;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    h1 {
+      margin: 0 0 .4rem;
+      font-size: 1.5rem;
+    }
+
+    .subtitle {
+      margin: 0 0 .7rem;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .tag-row {
+      font-size: .9rem;
+      margin-bottom: .5rem;
+    }
+
+    .tag-label {
+      font-weight: 600;
+    }
+
+    .project-desc {
+      font-size: .9rem;
+      margin-top: .6rem;
+    }
+
+    .section-title {
+      font-weight: 600;
+      margin-top: .8rem;
+      margin-bottom: .2rem;
+      font-size: 1.25rem;
+    }
+
+    .info-line {
+      font-size: .9rem;
+      margin: .1rem 0;
+    }
+
+    .links-list {
+      list-style: none;
+      padding: 0;
+      margin: .3rem 0 0;
+      font-size: .9rem;
+    }
+
+    .links-list li {
+      margin: .15rem 0;
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .team {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bio-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .25rem;
+    }
+
+    .bio-pic {
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+	
+	.bio-pic-britney {
+	object-position: 50% 9%;
+	}
+
+	.bio-pic-jalon {
+	object-position: 50% 5.5%;
+	}
+	
+
+    .name {
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    .course-info {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+
+    .footer-note {
+      margin-top: .6rem;
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- All required information is visible on this single landing card -->
+  <main class="card" aria-label="HK-2 Project Landing Page">
+    <!-- LEFT SIDE: Project info -->
+    <section>
+      <!-- Project ID, color, title -->
+      <h1>Human-Robot Teaming</h1>
+      <p class="subtitle">
+        <span class="tag-row">
+          <span class="tag-label">Project ID:</span> HK-2 &nbsp;|&nbsp;
+          <span class="tag-label">Color:</span> RED 
+        </span>
+      </p>
+
+      <!-- Course number, semester, year (UPDATE THESE VALUES) -->
+      <p class="info-line">
+        <span class="tag-label">Course:</span> Senior Project 4850 Section 2 – Fall Semester 2025
+        <!-- Example: CS 4XXX – Fall 2025 -->
+      </p>
+
+      <!-- Short project description (your original text, trimmed) -->
+      <p class="project-desc">
+        Large Language Models (LLMs) are utilized in various domains to complete multiple tasks.
+        In this project, we develop and evaluate a modular framework that uses an LLM to convert
+        natural-language task descriptions into robot-executable action plans for collaborative
+        human-robot teams. Using Webots' Simulation and Hugging Face's LLMs, we've design a robot-agnostic JSON
+        action schema to support portable, simulation-ready action plans.
+      </p>
+
+         <!-- Navigation links to documents (as PDFs), GitHub, and video -->
+      <p class="section-title">Project Documents (PDF)</p>
+      <ul class="links-list">
+        <!-- Make sure HK2_Final_Report.pdf is inside the docs/ folder -->
+        <li><a href="docs/HK2-Final-Report.pdf" target="_blank">Final Project Report (PDF)</a></li>
+        <li><a href="docs/HK2-STP-STR.pdf" target="_blank">Software Test Plan/Software Test Report (PDF)</a></li>
+        <li><a href="docs/HK2-RED-DEV.pdf" target="_blank">Design/Architecture Document (PDF)</a></li>
+      </ul>
+
+      <p class="section-title">Project Repositories & Media</p>
+      <ul class="links-list">
+        <li><a href="https://github.com/codegup/human-learning-robot-research" target="_blank">Project GitHub Repository</a></li>
+        <li><a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">Final Presentation Video (Narrated Demo)</a></li>
+      </ul>
+    </section>
+
+    <!-- RIGHT SIDE: Team bio pics and names -->
+    <aside class="team" aria-label="Team Members">
+      <div>
+        <p class="section-title">Team Members</p>
+
+        <div class="bio-row" style="margin-top:2rem;"> 
+          <img src="img/Britney.png" alt="Photo of Britney Lam" class="bio-pic bio-pic-britney" />
+          <div class="name">Britney Lam</div>
+        </div>
+
+        <div class="bio-row" style="margin-top:6rem;"> 
+          <img src="img/Jalon.png" alt="Photo of Jalon Jones" class="bio-pic bio-pic-jalon" />
+          <div class="name">Jalon Jones</div>
+        </div>
+      </div>
+
+      <!-- Course info repeated small so it's still clearly visible -->
+      <div class="course-info">
+        CS 4850 &bull; Fall 2025
+      </div>
+    </aside>
+
+  </main>
+</body>
+</html>
