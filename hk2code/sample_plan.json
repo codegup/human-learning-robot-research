@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "task_nl": "Walk forward for two seconds, then wait one second, then wave hello. Produce exactly 3 actions.",
+  "actions": [
+    {"id": "a1", "type": "navigate", "goal": "walk forward", "params": {"direction": "forward", "duration_s": 2}},
+    {"id": "a2", "type": "wait", "goal": "pause", "params": {"duration_s": 1}},
+    {"id": "a3", "type": "communicate", "goal": "wave", "params": {"gesture": "wave", "message": "hello"}}
+  ],
+  "metadata": {}
+}
